@@ -24,10 +24,9 @@
         
         .hero-section {
             position: relative;
-            height: 80vh;
-            min-height: 600px;
+            min-height: 80vh;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            overflow: hidden;
+            overflow: visible;
         }
         
         .hero-bg {
@@ -35,7 +34,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 150vh;
             background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=futuristic%20tech%20museum%20exhibition%20hall%20with%20blue%20neon%20lights%20and%20digital%20projections&image_size=landscape_16_9');
             background-size: cover;
             background-position: center;
@@ -48,7 +47,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 150vh;
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
             z-index: 2;
         }
@@ -62,7 +61,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 150px 20px 0;
         }
         
         .hero-title {
@@ -94,8 +93,10 @@
         }
         
         .exhibition-grid {
+            position: relative;
             padding: 80px 0;
-            background: #0f172a;
+            background: transparent;
+            z-index: 3;
         }
         
         .section-title {
@@ -173,6 +174,252 @@
             font-size: 2rem;
             color: #38bdf8;
             transition: all 0.3s ease;
+        }
+        
+        /* 博物馆布局样式 */
+        .museum-layout {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .museum-map {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 中央大厅 */
+        .central-hall {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            background: rgba(56, 189, 248, 0.9);
+            border: 2px solid rgba(56, 189, 248, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .hall-content {
+            text-align: center;
+            z-index: 3;
+            position: relative;
+        }
+        
+        .hall-content h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hall-content p {
+            font-size: 0.9rem;
+            color: #e2e8f0;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* 走廊 */
+        .corridors {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .corridor {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            position: absolute;
+        }
+        
+        .corridor.horizontal {
+            width: 80%;
+            height: 40px;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            border-radius: 20px;
+        }
+        
+        .corridor.vertical {
+            width: 40px;
+            height: 80%;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 20px;
+        }
+        
+        /* 房间样式 */
+        .museum-room {
+            position: relative;
+            width: 240px;
+            height: 200px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .museum-room:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.3);
+            border-color: rgba(56, 189, 248, 0.6);
+        }
+        
+        .museum-room.top-left {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+        }
+        
+        .museum-room.top-right {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+        }
+        
+        .museum-room.bottom-left {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+        }
+        
+        .museum-room.bottom-right {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+        }
+        
+        .room-content {
+            width: 100%;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        
+        .room-door {
+            width: 60px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            margin-top: 0.5rem;
+        }
+        
+        .room-door::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            width: 8px;
+            height: 30px;
+            background: rgba(56, 189, 248, 0.3);
+            border-radius: 4px;
+        }
+        
+        .museum-room:hover .room-door {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(99, 102, 241, 0.3));
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+        
+        .door-icon {
+            font-size: 1.5rem;
+            color: #38bdf8;
+            transition: all 0.3s ease;
+        }
+        
+        .museum-room:hover .door-icon {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+        }
+        
+        .room-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 0.5rem;
+        }
+        
+        .room-description {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .room-status {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: rgba(234, 88, 12, 0.1);
+            border: 1px solid rgba(234, 88, 12, 0.3);
+            border-radius: 10px;
+            font-size: 0.65rem;
+            color: #f97316;
+            font-weight: 500;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .museum-map {
+                min-height: 800px;
+                flex-direction: column;
+            }
+            
+            .museum-room {
+                position: relative;
+                position: static;
+                margin: 1rem;
+            }
+            
+            .central-hall {
+                position: relative;
+                position: static;
+                margin: 1rem;
+                transform: none;
+            }
+            
+            .corridors {
+                display: none;
+            }
         }
         
         .exhibition-card:hover .card-icon {
@@ -439,65 +686,113 @@
             <p>选择一个展厅，探索科学与技术的演进历程，感受知识的流动与生长</p>
         </div>
         
-        <div class="grid-container">
-            <!-- 展厅 1 -->
-            <div class="exhibition-card" data-theme="concept">
-                <div class="card-icon">
-                    <i class="fa fa-lightbulb-o"></i>
+        <div class="museum-layout">
+            <div class="museum-map">
+                <!-- 中央大厅 -->
+                <div class="central-hall">
+                    <div class="hall-content">
+                        <h3>中央大厅</h3>
+                        <p>理性的轨迹</p>
+                    </div>
                 </div>
-                <h3 class="card-title">概念进化史</h3>
-                <p class="card-description">
-                    展示人类对核心概念的理解如何从谬误到真理，从模糊到精确的认知迭代过程
-                </p>
-                <span class="card-status">等待入驻</span>
-                <a href="#" class="card-button mt-4 view-details" data-theme="concept">
-                    查看详情
-                </a>
-            </div>
-            
-            <!-- 展厅 2 -->
-            <div class="exhibition-card" data-theme="technology">
-                <div class="card-icon">
-                    <i class="fa fa-cogs"></i>
+                
+                <!-- 房间 1 - 左上 -->
+                <div class="museum-room top-left" data-theme="concept">
+                    <div class="room-content">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="room-door">
+                                <div class="door-icon">
+                                    <i class="fa fa-lightbulb-o"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-left">
+                                <h3 class="room-title">概念进化史</h3>
+                                <p class="room-description">认知迭代的历程</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-2">
+                            <span class="room-status">等待入驻</span>
+                            <button class="view-details text-xs px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-lg text-cyan-400 hover:bg-cyan-500/30 transition-all" data-theme="concept">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="card-title">技术造物史</h3>
-                <p class="card-description">
-                    展示技术或工具如何从简陋的原型进化为改变世界的如神力量
-                </p>
-                <span class="card-status">等待入驻</span>
-                <a href="#" class="card-button mt-4 view-details" data-theme="technology">
-                    查看详情
-                </a>
-            </div>
-            
-            <!-- 展厅 3 -->
-            <div class="exhibition-card" data-theme="exploration">
-                <div class="card-icon">
-                    <i class="fa fa-compass"></i>
+                
+                <!-- 房间 2 - 右上 -->
+                <div class="museum-room top-right" data-theme="technology">
+                    <div class="room-content">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="room-door">
+                                <div class="door-icon">
+                                    <i class="fa fa-cogs"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-left">
+                                <h3 class="room-title">技术造物史</h3>
+                                <p class="room-description">工具进化的力量</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-2">
+                            <span class="room-status">等待入驻</span>
+                            <button class="view-details text-xs px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-lg text-cyan-400 hover:bg-cyan-500/30 transition-all" data-theme="technology">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="card-title">探索征程史</h3>
-                <p class="card-description">
-                    以时间为线索，记录人类在地理、太空、微观等领域的冒险里程碑
-                </p>
-                <span class="card-status">等待入驻</span>
-                <a href="#" class="card-button mt-4 view-details" data-theme="exploration">
-                    查看详情
-                </a>
-            </div>
-            
-            <!-- 展厅 4 -->
-            <div class="exhibition-card" data-theme="anatomy">
-                <div class="card-icon">
-                    <i class="fa fa-sitemap"></i>
+                
+                <!-- 房间 3 - 左下 -->
+                <div class="museum-room bottom-left" data-theme="exploration">
+                    <div class="room-content">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="room-door">
+                                <div class="door-icon">
+                                    <i class="fa fa-compass"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-left">
+                                <h3 class="room-title">探索征程史</h3>
+                                <p class="room-description">人类冒险的里程碑</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-2">
+                            <span class="room-status">等待入驻</span>
+                            <button class="view-details text-xs px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-lg text-cyan-400 hover:bg-cyan-500/30 transition-all" data-theme="exploration">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="card-title">结构剖析与导览</h3>
-                <p class="card-description">
-                    对复杂系统进行空间或功能上的逻辑拆解，帮助学习者层层剥开复杂系统
-                </p>
-                <span class="card-status">等待入驻</span>
-                <a href="#" class="card-button mt-4 view-details" data-theme="anatomy">
-                    查看详情
-                </a>
+                
+                <!-- 房间 4 - 右下 -->
+                <div class="museum-room bottom-right" data-theme="anatomy">
+                    <div class="room-content">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="room-door">
+                                <div class="door-icon">
+                                    <i class="fa fa-sitemap"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 text-left">
+                                <h3 class="room-title">结构剖析与导览</h3>
+                                <p class="room-description">复杂系统的拆解</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-2">
+                            <span class="room-status">等待入驻</span>
+                            <button class="view-details text-xs px-3 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded-lg text-cyan-400 hover:bg-cyan-500/30 transition-all" data-theme="anatomy">
+                                查看详情
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 走廊 -->
+                <div class="corridors">
+                    <div class="corridor horizontal"></div>
+                    <div class="corridor vertical"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -894,6 +1189,14 @@
             document.querySelectorAll('.view-details').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
+                    const theme = this.getAttribute('data-theme');
+                    showThemeDetails(theme);
+                });
+            });
+            
+            // 博物馆房间点击
+            document.querySelectorAll('.museum-room').forEach(room => {
+                room.addEventListener('click', function() {
                     const theme = this.getAttribute('data-theme');
                     showThemeDetails(theme);
                 });
