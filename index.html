@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>理性的回响 | 未来博物馆线上特展</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', 'Inter', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        .hero-section {
+            position: relative;
+            height: 80vh;
+            min-height: 600px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=futuristic%20tech%20museum%20exhibition%20hall%20with%20blue%20neon%20lights%20and%20digital%20projections&image_size=landscape_16_9');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.4;
+            z-index: 1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+            z-index: 2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 50%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+            }
+            100% {
+                text-shadow: 0 0 40px rgba(56, 189, 248, 0.6), 0 0 60px rgba(99, 102, 241, 0.4);
+            }
+        }
+        
+        .exhibition-grid {
+            padding: 80px 0;
+            background: #0f172a;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .exhibition-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+        
+        .exhibition-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+        
+        .exhibition-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #6366f1);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .exhibition-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #38bdf8;
+            transition: all 0.3s ease;
+        }
+        
+        .exhibition-card:hover .card-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+        }
+        
+        .card-description {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .card-status {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: #22c55e;
+            font-weight: 500;
+        }
+        
+        .card-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .card-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+        }
+        
+        .theme-details {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .details-content {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 16px;
+            padding: 3rem;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close-button:hover {
+            color: #e2e8f0;
+        }
+        
+        .details-header {
+            margin-bottom: 2rem;
+        }
+        
+        .details-header h3 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #38bdf8;
+            margin-bottom: 1rem;
+        }
+        
+        .details-header p {
+            font-size: 1.125rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+        
+        .details-section {
+            margin-bottom: 2rem;
+        }
+        
+        .details-section h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .details-section p {
+            font-size: 1rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        
+        .examples-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .examples-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .examples-list li:before {
+            content: '•';
+            color: #38bdf8;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        
+        .examples-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .loading-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 3px solid rgba(56, 189, 248, 0.3);
+            border-top: 3px solid #38bdf8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .exhibition-card {
+                padding: 2rem;
+            }
+            
+            .details-content {
+                padding: 2rem;
+                max-width: 100%;
+            }
+        }
+        
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .floating-element {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(56, 189, 248, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-50px) translateX(20px) scale(1.2);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载动画 -->
+    <div class="loading-animation" id="loadingAnimation">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- 英雄区域 -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="floating-elements" id="floatingElements"></div>
+        <div class="hero-content">
+            <h1 class="hero-title font-serif">理性的轨迹</h1>
+            <p class="hero-subtitle font-sans">
+                未来博物馆线上特展 · 探索科学与技术的演进历程
+            </p>
+            <a href="#exhibitions" class="card-button">
+                <i class="fa fa-arrow-down mr-2"></i>探索展厅
+            </a>
+        </div>
+    </section>
+    
+    <!-- 展厅区域 -->
+    <section class="exhibition-grid" id="exhibitions">
+        <div class="section-title">
+            <h2>四大主题展厅</h2>
+            <p>选择一个展厅，探索科学与技术的演进历程，感受知识的流动与生长</p>
+        </div>
+        
+        <div class="grid-container">
+            <!-- 展厅 1 -->
+            <div class="exhibition-card" data-theme="concept">
+                <div class="card-icon">
+                    <i class="fa fa-lightbulb-o"></i>
+                </div>
+                <h3 class="card-title">概念进化史</h3>
+                <p class="card-description">
+                    展示人类对核心概念的理解如何从谬误到真理，从模糊到精确的认知迭代过程
+                </p>
+                <span class="card-status">等待入驻</span>
+                <a href="#" class="card-button mt-4 view-details" data-theme="concept">
+                    查看详情
+                </a>
+            </div>
+            
+            <!-- 展厅 2 -->
+            <div class="exhibition-card" data-theme="technology">
+                <div class="card-icon">
+                    <i class="fa fa-cogs"></i>
+                </div>
+                <h3 class="card-title">技术造物史</h3>
+                <p class="card-description">
+                    展示技术或工具如何从简陋的原型进化为改变世界的如神力量
+                </p>
+                <span class="card-status">等待入驻</span>
+                <a href="#" class="card-button mt-4 view-details" data-theme="technology">
+                    查看详情
+                </a>
+            </div>
+            
+            <!-- 展厅 3 -->
+            <div class="exhibition-card" data-theme="exploration">
+                <div class="card-icon">
+                    <i class="fa fa-compass"></i>
+                </div>
+                <h3 class="card-title">探索征程史</h3>
+                <p class="card-description">
+                    以时间为线索，记录人类在地理、太空、微观等领域的冒险里程碑
+                </p>
+                <span class="card-status">等待入驻</span>
+                <a href="#" class="card-button mt-4 view-details" data-theme="exploration">
+                    查看详情
+                </a>
+            </div>
+            
+            <!-- 展厅 4 -->
+            <div class="exhibition-card" data-theme="anatomy">
+                <div class="card-icon">
+                    <i class="fa fa-sitemap"></i>
+                </div>
+                <h3 class="card-title">结构剖析与导览</h3>
+                <p class="card-description">
+                    对复杂系统进行空间或功能上的逻辑拆解，帮助学习者层层剥开复杂系统
+                </p>
+                <span class="card-status">等待入驻</span>
+                <a href="#" class="card-button mt-4 view-details" data-theme="anatomy">
+                    查看详情
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 任务书内容 -->
+    <section class="task-content py-20 relative overflow-hidden">
+        <!-- 背景效果 -->
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"></div>
+        <div class="absolute inset-0 opacity-20">
+            <div class="floating-elements" id="taskFloatingElements"></div>
+        </div>
+        
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold font-serif mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    任务书内容
+                </h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    探索科学与技术的演进历程，感受知识的流动与生长
+                </p>
+                <div class="w-32 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mt-6"></div>
+            </div>
+            
+            <div class="space-y-16">
+                <!-- 任务背景 -->
+                <div class="task-card group">
+                    <div class="bg-slate-800/60 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-8 hover:border-cyan-400/40 transition-all duration-500 transform group-hover:translate-y-[-8px] group-hover:shadow-[0_20px_40px_rgba(56,189,248,0.15)]">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl flex items-center justify-center border border-cyan-500/30 group-hover:border-cyan-400/50 transition-all duration-300">
+                                    <i class="fa fa-lightbulb-o text-3xl text-cyan-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <span class="inline-flex items-center justify-center w-8 h-8 bg-cyan-500/20 rounded-full text-cyan-400 font-semibold">1</span>
+                                    任务背景
+                                </h3>
+                                <div class="text-slate-300 space-y-4 leading-relaxed">
+                                    <p>欢迎来到未来博物馆。</p>
+                                    <p>作为全球领先的科普机构，我们发现传统的“静态展示”正在失效：<strong class="text-white">参观者们厌倦了点击“下一页”的 PPT 式阅读</strong>，他们不再满足于阅读枯燥的文字列表，而是<strong class="text-white">渴望在指尖划过屏幕时，能直观感受到知识的“流动”与“生长”</strong>。</p>
+                                    <p>为此，<strong class="text-white">馆方决定彻底废除旧版静态官网，启动《理性的轨迹》线上特展</strong>。我们不打算聘请传统的外包公司，而是<strong class="text-white">公开招募优秀的三人策展小组，利用 AI 协作技术重塑科学史的表达方式</strong>。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 你的处境与挑战 -->
+                <div class="task-card group">
+                    <div class="bg-slate-800/60 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-8 hover:border-cyan-400/40 transition-all duration-500 transform group-hover:translate-y-[-8px] group-hover:shadow-[0_20px_40px_rgba(56,189,248,0.15)]">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center border border-purple-500/30 group-hover:border-purple-400/50 transition-all duration-300">
+                                    <i class="fa fa-rocket text-3xl text-purple-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <span class="inline-flex items-center justify-center w-8 h-8 bg-purple-500/20 rounded-full text-purple-400 font-semibold">2</span>
+                                    你的处境与挑战
+                                </h3>
+                                <div class="text-slate-300 space-y-6">
+                                    <p>你和你的小组成员面对的是四个待开发的虚拟展厅。馆方对你们的要求极高：</p>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="bg-slate-700/40 border border-cyan-500/10 rounded-xl p-4 hover:border-cyan-400/30 transition-all duration-300">
+                                            <div class="text-cyan-400 font-semibold mb-2 flex items-center gap-2">
+                                                <i class="fa fa-globe"></i>
+                                                信息荒原
+                                            </div>
+                                            <p class="text-sm text-slate-300">馆方不提供现成的教材，你手中只有互联网上散乱、海量、真假参半的信息。</p>
+                                        </div>
+                                        <div class="bg-slate-700/40 border border-cyan-500/10 rounded-xl p-4 hover:border-cyan-400/30 transition-all duration-300">
+                                            <div class="text-cyan-400 font-semibold mb-2 flex items-center gap-2">
+                                                <i class="fa fa-robot"></i>
+                                                “偏科”的伙伴
+                                            </div>
+                                            <p class="text-sm text-slate-300">你们的开发伙伴是编程速度快、但不懂科学和历史且经常产生幻觉的 AI。</p>
+                                        </div>
+                                        <div class="bg-slate-700/40 border border-cyan-500/10 rounded-xl p-4 hover:border-cyan-400/30 transition-all duration-300">
+                                            <div class="text-cyan-400 font-semibold mb-2 flex items-center gap-2">
+                                                <i class="fa fa-trophy"></i>
+                                                职业竞争
+                                            </div>
+                                            <p class="text-sm text-slate-300">你们需要通过“竞标”获得其中一个展厅的策展权，作品必须在交互深度和逻辑美感上打动评审团。</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <p>你们不仅是学生，更是跨界专家：</p>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div class="bg-slate-700/40 border border-purple-500/10 rounded-xl p-4 hover:border-purple-400/30 transition-all duration-300">
+                                            <div class="text-purple-400 font-semibold mb-2 flex items-center gap-2">
+                                                <i class="fa fa-book"></i>
+                                                内容定义者（策展人）
+                                            </div>
+                                            <p class="text-sm text-slate-300">负责从四大主题展厅中选择一个方向，筛选并梳理海量信息，定义展厅的叙事逻辑。</p>
+                                        </div>
+                                        <div class="bg-slate-700/40 border border-purple-500/10 rounded-xl p-4 hover:border-purple-400/30 transition-all duration-300">
+                                            <div class="text-purple-400 font-semibold mb-2 flex items-center gap-2">
+                                                <i class="fa fa-cogs"></i>
+                                                工具驾驭者（AI 产品经理）
+                                            </div>
+                                            <p class="text-sm text-slate-300">撰写精准的提示词来指挥 AI 工程师，以高审美标准进行验收与迭代。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 交付成果 -->
+                <div class="task-card group">
+                    <div class="bg-slate-800/60 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-8 hover:border-cyan-400/40 transition-all duration-500 transform group-hover:translate-y-[-8px] group-hover:shadow-[0_20px_40px_rgba(56,189,248,0.15)]">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-2xl flex items-center justify-center border border-green-500/30 group-hover:border-green-400/50 transition-all duration-300">
+                                    <i class="fa fa-gift text-3xl text-green-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <span class="inline-flex items-center justify-center w-8 h-8 bg-green-500/20 rounded-full text-green-400 font-semibold">3</span>
+                                    交付成果
+                                </h3>
+                                <div class="text-slate-300 space-y-6">
+                                    <p>你需要提交并展示两样东西：</p>
+                                    
+                                    <div class="space-y-6">
+                                        <div class="bg-slate-700/40 border border-green-500/10 rounded-xl p-6 hover:border-green-400/30 transition-all duration-300">
+                                            <h4 class="text-xl font-semibold text-green-300 mb-4 flex items-center gap-2">
+                                                <i class="fa fa-laptop"></i>
+                                                1. 产品本体：主题交互网页
+                                            </h4>
+                                            <ul class="space-y-3">
+                                                <li class="flex gap-3">
+                                                    <div class="flex-shrink-0 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-sm">•</div>
+                                                    <div>
+                                                        <span class="text-green-400 font-medium">结构化展示：</span> 网页必须基于你梳理的信息生成，而非死板的文本粘贴。
+                                                    </div>
+                                                </li>
+                                                <li class="flex gap-3">
+                                                    <div class="flex-shrink-0 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-sm">•</div>
+                                                    <div>
+                                                        <span class="text-green-400 font-medium">核心功能：</span> 你设计的网页必须具有交互效果，并且你设计的交互效果应符合你的主题逻辑。
+                                                    </div>
+                                                </li>
+                                                <li class="flex gap-3">
+                                                    <div class="flex-shrink-0 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-sm">•</div>
+                                                    <div>
+                                                        <span class="text-green-400 font-medium">交互要求：</span> 支持鼠标滚轮流畅滑动；关键节点有悬停反馈；点击弹出详细信息卡片（包含结构化的标题、年份、影响等级、多媒体素材）等等。
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-slate-700/40 border border-green-500/10 rounded-xl p-6 hover:border-green-400/30 transition-all duration-300">
+                                            <h4 class="text-xl font-semibold text-green-300 mb-4 flex items-center gap-2">
+                                                <i class="fa fa-file-text"></i>
+                                                2. 策展手记：AI 协作迭代日志
+                                            </h4>
+                                            <ul class="space-y-3">
+                                                <li class="flex gap-3">
+                                                    <div class="flex-shrink-0 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-sm">•</div>
+                                                    <div>
+                                                        <span class="text-green-400 font-medium">信息呈现逻辑：</span> 展示你是如何设计信息的呈现的，你提炼了什么样的事件之间的隐含关系，你为什么觉得这样的组织是有意义的？
+                                                    </div>
+                                                </li>
+                                                <li class="flex gap-3">
+                                                    <div class="flex-shrink-0 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-sm">•</div>
+                                                    <div>
+                                                        <span class="text-green-400 font-medium">迭代修正：</span> 记录至少 3 次关键的“指令-评估-修正”循环。展示 AI 第一次生成的“灾难现场”和你如何通过精准 Prompt 将其拯救回来的过程。
+                                                    </div>
+                                                </li>
+                                                <li class="flex gap-3">
+                                                    <div class="flex-shrink-0 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-sm">•</div>
+                                                    <div>
+                                                        <span class="text-green-400 font-medium">人机边界反思：</span> 在日志最后，回答：“在这个网页中，哪一部分是 AI 绝对无法替代，必须由我的人类大脑来决定的？”
+                                                    </div>
+                                                </li>
+                                                <li class="flex gap-3">
+                                                    <div class="flex-shrink-0 w-6 h-6 bg-green-500/20 rounded-full flex items-center justify-center text-green-400 text-sm">•</div>
+                                                    <div>
+                                                        <span class="text-green-400 font-medium">评价标准：</span> 阐述你是如何定义“好”的，以及你如何指挥 AI 遵循你的评价标准。
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 标准 -->
+                <div class="task-card group">
+                    <div class="bg-slate-800/60 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-8 hover:border-cyan-400/40 transition-all duration-500 transform group-hover:translate-y-[-8px] group-hover:shadow-[0_20px_40px_rgba(56,189,248,0.15)]">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 bg-gradient-to-br from-amber-500/20 to-orange-500/20 rounded-2xl flex items-center justify-center border border-amber-500/30 group-hover:border-amber-400/50 transition-all duration-300">
+                                    <i class="fa fa-trophy text-3xl text-amber-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-3">
+                                    <span class="inline-flex items-center justify-center w-8 h-8 bg-amber-500/20 rounded-full text-amber-400 font-semibold">4</span>
+                                    评选标准
+                                </h3>
+                                <div class="text-slate-300 space-y-6">
+                                    <p>你的作品将依据《AI 驱动的交互网页构建量规》进行评价，重点考核以下三个维度：</p>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div class="bg-slate-700/40 border border-amber-500/10 rounded-xl p-5 hover:border-amber-400/30 transition-all duration-300 group-hover:bg-slate-700/60">
+                                            <div class="text-amber-400 font-semibold mb-3 flex items-center gap-2">
+                                                <i class="fa fa-cogs fa-spin"></i>
+                                                AI 协作能力
+                                            </div>
+                                            <p class="text-sm text-slate-300">你是否展现了驾驭 AI 的能力？还是被 AI 带着走？</p>
+                                        </div>
+                                        <div class="bg-slate-700/40 border border-amber-500/10 rounded-xl p-5 hover:border-amber-400/30 transition-all duration-300 group-hover:bg-slate-700/60">
+                                            <div class="text-amber-400 font-semibold mb-3 flex items-center gap-2">
+                                                <i class="fa fa-eye"></i>
+                                                产品思维
+                                            </div>
+                                            <p class="text-sm text-slate-300">你的网页是否好用、好看？你是否对 AI 的平庸产出说了“不”？</p>
+                                        </div>
+                                        <div class="bg-slate-700/40 border border-amber-500/10 rounded-xl p-5 hover:border-amber-400/30 transition-all duration-300 group-hover:bg-slate-700/60">
+                                            <div class="text-amber-400 font-semibold mb-3 flex items-center gap-2">
+                                                <i class="fa fa-sitemap"></i>
+                                                信息结构化
+                                            </div>
+                                            <p class="text-sm text-slate-300">知识是否被有效地组织成了有逻辑的，容易被理解的形式？</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mt-8">
+                                        <div class="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 rounded-xl p-6 text-center">
+                                            <p class="text-xl font-bold text-amber-300 mb-2">优秀小组的作品将竞标成功，入驻展厅！</p>
+                                            <p class="text-amber-100">展现你的创意和技术实力，成为未来博物馆的策展人！</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 主题详情模态框 -->
+    <div class="theme-details" id="themeDetails">
+        <div class="details-content">
+            <button class="close-button" id="closeDetails">&times;</button>
+            <div class="details-header">
+                <h3 id="detailsTitle">主题标题</h3>
+                <p id="detailsDescription">主题描述</p>
+            </div>
+            <div class="details-section">
+                <h4><i class="fa fa-info-circle"></i> 内核概念</h4>
+                <p id="detailsCore">内核概念描述</p>
+            </div>
+            <div class="details-section">
+                <h4><i class="fa fa-examples"></i> 示例主题</h4>
+                <ul class="examples-list" id="detailsExamples">
+                    <!-- 示例列表将通过JS动态添加 -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 主题数据
+        const themes = {
+            concept: {
+                title: "概念进化史",
+                description: "展示人类对核心概念的理解如何从谬误到真理，从模糊到精确的认知迭代过程",
+                core: "内核是人类的认知迭代。展示人类对某个核心概念的理解是如何从谬误到真理，从模糊到精确的。类似'深潜'（从浅表到深层）或'登山'（从山脚迷雾到山顶视野）。",
+                examples: [
+                    "物质是什么：'物质结构'认知的不断下沉（元素>原子>电子>原子核>质子中子>夸克标准模型）",
+                    "生命的密码：从孟德尔的豌豆、达尔文的猜想，到双螺旋结构的发现，再到 CRISPR 基因编辑",
+                    "引力的肖像：从亚里士多德的'自然位置'，到牛顿的'万有引力'，再到爱因斯坦的'时空弯曲'",
+                    "元素周期表的拼图：从炼金术的四元素说，到拉瓦锡的氧化说，再到门捷列夫的周期律预测",
+                    "宇宙中心在哪里？：从地心说、日心说，到银河系边缘，再到多元宇宙"
+                ]
+            },
+            technology: {
+                title: "技术造物史",
+                description: "展示技术或工具如何从简陋的原型进化为改变世界的如神力量",
+                core: "内核是人类技术的爆发增长。展示某项技术或工具是如何从简陋的原型进化为改变世界的如神力量。类似'加速'（越来越快）或'生长'（从种子到森林）。",
+                examples: [
+                    "计算能力的指数增长史（算盘>机械计算机>电子管>晶体管>芯片超级计算机>AI大模型）",
+                    "人类'控制电'的完整历史",
+                    "与死神抢人：麻醉与外科手术的进化史（从理发师放血到达芬奇手术机器人）",
+                    "距离的消失：从烽火台、莫尔斯电码、海底光缆到星链（Starlink）",
+                    "光明的变迁：从篝火、鲸油灯、白炽灯到 LED 与核聚变'人造太阳'",
+                    "人类的皮肤：从石器、青铜、钢铁到碳纤维与超材料"
+                ]
+            },
+            exploration: {
+                title: "探索征程史",
+                description: "以时间为线索，记录人类在地理、太空、微观等领域的冒险里程碑",
+                core: "内核是空间或边界的拓展。以时间为线索，记录人类在某一特定领域（地理、太空、微观）的冒险里程碑。类似'远征'（地图的展开）或'长河'（线性的足迹）。",
+                examples: [
+                    "'太空探测'全事件时间线：第一颗卫星、第一次载人、第一次登月、火星车、韦伯望远镜、彗星探测...",
+                    "病毒与疫苗的百年战争：人类对抗天花、流感、脊髓灰质炎、COVID-19 的关键战役",
+                    "数字的史诗：从'0'的发现，到无理数的恐慌，再到虚数 i 的确立",
+                    "深海两万里：人类潜水器的深度突破与深海生物发现史",
+                    "诺贝尔奖的'蝴蝶效应'：选取某个具体的诺奖（如青霉素或晶体管）或同样级别的成果，展示它被发现的过程及其后100年对世界的连锁改变"
+                ]
+            },
+            anatomy: {
+                title: "结构剖析与导览",
+                description: "对复杂系统进行空间或功能上的逻辑拆解，帮助学习者层层剥开复杂系统",
+                core: "内核是对一个复杂系统进行空间上或者功能上的逻辑拆解。帮助学习者'层层剥开'一个复杂系统。类似'透视'（层层拆解）或'漫游'（移步换景）。",
+                examples: [
+                    "空间站/火星基地内部区域、功能、系统",
+                    "人体微观巡游：模拟一个红细胞从心脏出发，流经肺部、大脑再回来的全过程",
+                    "一棵树的生态系统：从根系的真菌网络，向上滚动到树干的昆虫世界，再到树冠的光合作用与鸟类",
+                    "粒子加速器导览：沿着欧洲核子研究中心（CERN）的 27公里管道滚动，展示粒子加速、碰撞和探测的各个环节"
+                ]
+            }
+        };
+        
+        // 初始化浮动元素
+        function initFloatingElements() {
+            // 顶部浮动元素
+            const container = document.getElementById('floatingElements');
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.top = Math.random() * 100 + '%';
+                element.style.animationDelay = Math.random() * 6 + 's';
+                element.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                container.appendChild(element);
+            }
+            
+            // 任务书区域浮动元素
+            const taskContainer = document.getElementById('taskFloatingElements');
+            for (let i = 0; i < 15; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.style.left = Math.random() * 100 + '%';
+                element.style.top = Math.random() * 100 + '%';
+                element.style.animationDelay = Math.random() * 8 + 's';
+                element.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                taskContainer.appendChild(element);
+            }
+        }
+        
+        // 显示主题详情
+        function showThemeDetails(theme) {
+            const details = document.getElementById('themeDetails');
+            const title = document.getElementById('detailsTitle');
+            const description = document.getElementById('detailsDescription');
+            const core = document.getElementById('detailsCore');
+            const examples = document.getElementById('detailsExamples');
+            
+            const themeData = themes[theme];
+            
+            title.textContent = themeData.title;
+            description.textContent = themeData.description;
+            core.textContent = themeData.core;
+            
+            // 清空示例列表
+            examples.innerHTML = '';
+            
+            // 添加示例
+            themeData.examples.forEach(example => {
+                const li = document.createElement('li');
+                li.textContent = example;
+                examples.appendChild(li);
+            });
+            
+            // 显示模态框
+            details.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // 关闭主题详情
+        function closeThemeDetails() {
+            const details = document.getElementById('themeDetails');
+            details.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        // 初始化事件监听
+        function initEventListeners() {
+            // 查看详情按钮
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const theme = this.getAttribute('data-theme');
+                    showThemeDetails(theme);
+                });
+            });
+            
+            // 关闭按钮
+            document.getElementById('closeDetails').addEventListener('click', closeThemeDetails);
+            
+            // 点击模态框外部关闭
+            document.getElementById('themeDetails').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeThemeDetails();
+                }
+            });
+            
+            // 滚动动画
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('DOMContentLoaded', function() {
+            // 隐藏加载动画
+            setTimeout(() => {
+                const loadingAnimation = document.getElementById('loadingAnimation');
+                loadingAnimation.style.opacity = '0';
+                setTimeout(() => {
+                    loadingAnimation.style.display = 'none';
+                }, 500);
+            }, 1000);
+            
+            // 初始化浮动元素
+            initFloatingElements();
+            
+            // 初始化事件监听
+            initEventListeners();
+        });
+    </script>
+</body>
+</html>
